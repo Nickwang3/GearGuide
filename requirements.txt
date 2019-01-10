@@ -1,0 +1,6 @@
+#dependencies
+bs4
+requests
+sqlalchemy
+selenium
+flask-restful
