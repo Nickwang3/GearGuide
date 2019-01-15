@@ -1,10 +1,10 @@
-from item_database import engine, session, Base
+from databases import engine, session, Base
 from scrape import get_tennis_racquets_dsg, get_tennis_racquets_academy, get_shoes_dsg, get_shoes_academy
 
 def main():
 
-    Base.metadata.drop_all(engine)
-    Base.metadata.create_all(engine)
+    Base.metadata.tables['items'].drop(engine)
+    Base.metadata.tables['items'].create(engine)
 
     #call scraper functions and commit items to database
     item_list = get_tennis_racquets_dsg()

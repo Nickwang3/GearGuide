@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup as soup
 import requests
-from item_database import create_item, Item
+from databases import create_item, Item
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -171,6 +171,7 @@ def get_shoes_dsg():
 
     browser.get(shoes_url)
 
+    browser.refresh()
 
     next_button_found = browser.find_element_by_id('WC_SearchBasedNavigationResults_pagination_link_right_categoryResults').is_displayed()
 

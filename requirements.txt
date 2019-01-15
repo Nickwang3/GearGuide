@@ -4,3 +4,5 @@ requests
 sqlalchemy
 selenium
 flask-restful
+bcrypt
+passlib
