@@ -8,13 +8,12 @@ class Items extends Component {
     this.state = {
       error: null,
       isLoading: true,
-      items: [],
-      value: null
+      items: []
     };
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/items/search/name/adidas")
+    fetch("http://localhost:5000/items/search/name/" + this.props.searchInput)
       .then(response => response.json())
       .then(
         data => {
@@ -43,6 +42,7 @@ class Items extends Component {
       return (
         <div>
           <h3 className="text-center">{items.length} Results...</h3>
+          <h5 className="text-center">Searched "{this.props.searchInput}"</h5>
           <div>
             {items.map(item => (
               <Item key={item.id} item={item} />

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 class Navbar extends Component {
   state = {
-    currentPage: "null"
+    currentPage: "null",
+    input: ""
   };
 
   render() {
@@ -40,20 +41,24 @@ class Navbar extends Component {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Dropdown
+                  Search for Items
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a className="dropdown-item" href="#">
-                    Action
+                    By name
                   </a>
                   <a className="dropdown-item" href="#">
-                    Another action
+                    By sport
                   </a>
-                  <div className="dropdown-divider" />
                   <a className="dropdown-item" href="#">
-                    Something else here
+                    By subgroup
                   </a>
                 </div>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  Login
+                </a>
               </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
@@ -66,6 +71,7 @@ class Navbar extends Component {
               <button
                 className="btn btn-outline-success my-2 my-sm-0"
                 type="submit"
+                onClick={this.props.onSearch}
               >
                 Search
               </button>

@@ -162,7 +162,7 @@ class Create_Account(Resource):
 
 
 #routes
-api.add_resource(Items, '/items')
+api.add_resource(Items, '/items', '/items/search/name/')
 api.add_resource(Search_by_id, '/items/search/id/<item_id>')
 api.add_resource(Search_by_sport, '/items/search/sport/<sport>')
 api.add_resource(Search_by_name, '/items/search/name/<input>')
