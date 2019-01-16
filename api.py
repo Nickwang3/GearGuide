@@ -39,10 +39,11 @@ class Items(Resource):
 
             item_list.append(row)
 
-        result['item_list'] = item_list
+        result['items'] = item_list
 
-        print()
-        return jsonify(result)
+        response = jsonify(result)
+        response.headers.extend({'Access-Control-Allow-Origin':'*'})
+        return response
 
 
 class Search_by_id(Resource):
@@ -106,7 +107,7 @@ class Search_by_name(Resource):
 
             item_list.append(row)
 
-        result['item_list'] = item_list
+        result['items'] = item_list
 
         response = jsonify(result)
         response.headers.extend({'Access-Control-Allow-Origin':'*'})
@@ -133,6 +134,10 @@ class Create_Account(Resource):
         parser.add_argument('email', type=str, required=True)
         args = parser.parse_args()
 
+        response.headers.extend({'Access-Control-Allow-Origin':'*'})
+        response.headers.extend({'Access-Control-Allow-Headers: Content-Type'})
+        response.headers.extend({"Access-Control-Allow-Methods", "POST"})
+
         username = args['username']
         password = args['password']
         email = args['email']
@@ -151,8 +156,6 @@ class Create_Account(Resource):
         response = jsonify({"message":"user created"})
         response.status_code = 201
 
-        response.headers.extend({'Access-Control-Allow-Headers: Content-Type'})
-        response.headers.extend({"Access-Control-Allow-Methods", "POST"})
         return response
 
 
