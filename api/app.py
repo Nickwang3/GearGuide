@@ -6,7 +6,7 @@ from flask import jsonify
 from flask_restful import reqparse
 from flask import make_response
 import requests
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, StatementError
 
 app = Flask(__name__)
 api = Api(app)
@@ -95,17 +95,22 @@ class Search_by_name(Resource):
     def get(self, input):
         result = {}
         item_list = []
-        for instance in session.query(Item).filter(Item.name.ilike("%"+input+"%")):
-            row = {}
-            row['id'] = instance.id
-            row['sport'] = instance.sport
-            row['subgroup'] = instance.subgroup
-            row['name'] = instance.name
-            row['price'] = instance.price
-            row['website'] = instance.website
-            row['link'] = instance.link
 
-            item_list.append(row)
+        try:
+            for instance in session.query(Item).filter(Item.name.ilike("%"+input+"%")):
+                row = {}
+                row['id'] = instance.id
+                row['sport'] = instance.sport
+                row['subgroup'] = instance.subgroup
+                row['name'] = instance.name
+                row['price'] = instance.price
+                row['website'] = instance.website
+                row['link'] = instance.link
+
+                item_list.append(row)
+                
+        except StatementError:
+            session.rollback()
 
         result['items'] = item_list
 
@@ -174,4 +179,7 @@ api.add_resource(Create_Account, '/create_account')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    try:
+        app.run(debug=True)
+    except KeyboardInterrupt:
+        session.close()
