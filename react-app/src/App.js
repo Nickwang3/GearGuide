@@ -5,10 +5,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
 
 class App extends Component {
-  state = {
-    isLoggedIn: false,
-    searchInput: ""
-  };
+  constructor(props) {
+    super(props);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.state = {
+      isLoggedIn: false,
+      searchInput: ""
+    };
+  }
 
   handleSearch(input) {
     this.setState({

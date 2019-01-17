@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 
 class Navbar extends Component {
-  state = {
-    currentPage: "null",
-    input: ""
-  };
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  // handleChange(e) {
+  //   this.setState({ input: e.target.value });
+  // }
+
+  handleChange(e) {
+    this.props.onSearch(e.target.value);
+  }
 
   render() {
     return (
@@ -67,11 +75,13 @@ class Navbar extends Component {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                value={this.input}
+                onChange={this.handleChange}
               />
               <button
                 className="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-                onClick={this.props.onSearch}
+                type="button"
+                // onClick={this.props.onSearch}
               >
                 Search
               </button>
